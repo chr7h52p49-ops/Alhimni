@@ -165,26 +165,97 @@
             transform: translateY(-2px);
         }
 
-        /* شاشة الكشف والتوعية الفورية */
-        .alert-box {
+        /* شاشة الكشف والتوعية (الهكر) */
+        .hack-alert-box {
             background-color: #fef2f2;
-            border: 2px dashed var(--danger-color);
+            border: 2px solid var(--danger-color);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             text-align: center;
         }
 
-        .alert-box h2 {
-            color: var(--danger-color);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .hack-alert-box .unlock-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .alert-box p {
+        .hack-alert-box h2 {
+            color: var(--danger-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hack-alert-box p {
             color: #7f1d1d;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .stolen-data-card {
+            background: white;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            text-align: right;
+        }
+
+        .stolen-data-card h3 {
+            color: var(--danger-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 1rem;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .data-value {
+            font-weight: 700;
+            color: var(--danger-color);
+        }
+
+        .tips-list {
+            list-style: none;
+            text-align: right;
+            margin-top: 1.5rem;
+        }
+
+        .tips-list li {
+            position: relative;
+            padding-right: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .tips-list li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
         /* المحتوى التوعوي والأقسام */
@@ -324,8 +395,8 @@
     <!-- هيدر الموقع -->
     <header>
         <div class="brand">
-            <!-- استخدام اسم ملف الشعار المطلوب: logo.png.png -->
-            <img src="logo.png.png" alt="شعار جمعية ألهمني">
+            <!-- استخدام اسم ملف الشعار الجديد: logo.png.jpg -->
+            <img src="logo.png.jpg" alt="شعار جمعية ألهمني">
             <div class="brand-text">
                 <h1>جمعية ألهمني لتنمية القدرات الشبابية</h1>
             </div>
@@ -348,28 +419,40 @@
                         <input type="text" id="fullName" class="form-control" placeholder="أدخل اسمك الكريم" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">البريد الإلكتروني:</label>
-                        <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+                        <label for="badgeNumber">رقم البادج:</label>
+                        <input type="text" id="badgeNumber" class="form-control" placeholder="أدخل رقم البادج الخاص بك" required>
                     </div>
                     <button type="submit" class="btn">تأكيد التسجيل والمشاركة</button>
                 </form>
             </div>
         </div>
 
-        <!-- الشاشة الثانية: لحظة الكشف والتوعية -->
+        <!-- الشاشة الثانية: لحظة الكشف والتوعية (محاكاة الاختراق) -->
         <div id="screen-2" class="screen">
             <div class="card">
-                <div class="alert-box">
-                    <h2><i class="fa-solid fa-triangle-exclamation"></i> تنبيه توعوي هام: لقد تعرضت لمحاكاة تصيد إلكتروني!</h2>
-                    <p>لا تقلق! لم يتم حفظ أي من بياناتك أو إرسالها لأي خادم خارجي؛ فهذه مجرد تجربة محاكاة أمان محلية تهدف إلى رفع وعيك الرقمي.</p>
-                </div>
+                <div class="hack-alert-box">
+                    <div class="unlock-icon">🔓</div>
+                    <h2>تنبيه أمني</h2>
+                    <p id="hackMessage">هكرنااااك يا زائرنا الكريم! دخلت رابط ما تعرف مصدره وكتبت معلوماتك على طول. لو كان هجوم احتيال حقيقي، كانت بياناتك بيد المحتال الحين.</p>
+                    
+                    <div class="stolen-data-card">
+                        <h3><i class="fa-solid fa-triangle-exclamation"></i> البيانات اللي "سُرِقت" منك الحين:</h3>
+                        <div class="data-row">
+                            <span class="data-label">الاسم</span>
+                            <span class="data-value" id="displayUser">زائر</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">رقم البادج</span>
+                            <span class="data-value" id="displayBadge">0000</span>
+                        </div>
+                    </div>
 
-                <h3 style="color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-shield-halved"></i> ماذا نتعلم من هذه التجربة؟</h3>
-                <ul style="line-height: 1.8; padding-right: 1.5rem; color: var(--text-color); margin-bottom: 2rem;">
-                    <li><strong>المظهر والشعار لا يكفيان:</strong> استخدام اسم جمعية ألهمني وشعارها الرسمي لا يعني بالضرورة أن الموقع موثوق بنسبة 100% إذا تم الوصول إليه عبر رابط مشبوه.</li>
-                    <li><strong>خطر إدخال البيانات:</strong> إدخال الاسم والبريد الإلكتروني في صفحات غير موثوقة يعرض خصوصيتك لخطر السرقة واستغلالها في رسائل احتيالية مستهدفة.</li>
-                    <li><strong>التحقق الدائم:</strong> يجب دائماً مراجعة نطاق الموقع (URL) والجهة المرسلة قبل كتابة أي معلومات شخصية.</li>
-                </ul>
+                    <ul class="tips-list">
+                        <li>تأكد من مصدر أي رابط قبل ما تفتحه أو تدخل فيه بياناتك.</li>
+                        <li>لا تكتب معلوماتك في صفحة ما تعرف مين وراها.</li>
+                        <li>لو الرابط يستعجلك أو يغريك بعرض — خذه بشك.</li>
+                    </ul>
+                </div>
 
                 <button class="btn" onclick="goToScreen(3)">تابع استكشاف الدليل التوعوي الكامل</button>
             </div>
@@ -468,13 +551,28 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // محاكاة اصطياد الفخ (الانتقال لصفحة الكشف والتوعية فور الضغط محلياً)
+        // محاكاة اصطياد الفخ التقني وعرض البيانات المدخلة (مثل "تتا")
         function triggerTrap(event) {
-            event.preventDefault(); // منع إرسال بيانات حقيقية لأي خادم
-            // تصفير الحقول محلياً وحماية الخصوصية المطلقة
+            event.preventDefault(); // منع إرسال بيانات حقيقية لأي خادم حفاظاً على الخصوصية
+
+            // جلب البيانات المدخلة من الحقول
+            const name = document.getElementById('fullName').value.trim();
+            const badge = document.getElementById('badgeNumber').value.trim();
+
+            // تحديث نصوص شاشة الكشف بالاسم المدخل تماماً
+            if (name) {
+                document.getElementById('hackMessage').innerText = `هكرنااااك يا ${name} ! دخلت رابط ما تعرف مصدره وكتبت معلوماتك على طول. لو كان هجوم احتيال حقيقي، كانت بياناتك بيد المحتال الحين.`;
+                document.getElementById('displayUser').innerText = name;
+            }
+            if (badge) {
+                document.getElementById('displayBadge').innerText = badge;
+            }
+
+            // تفريغ الحقول محلياً لحماية الخصوصية
             document.getElementById('fullName').value = '';
-            document.getElementById('email').value = '';
-            // الانتقال الفوري لشاشة المفاجأة والكشف
+            document.getElementById('badgeNumber').value = '';
+
+            // الانتقال الفوري لشاشة مفاجأة الاختراق
             goToScreen(2);
         }
 
